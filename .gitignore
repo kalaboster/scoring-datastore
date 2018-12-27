@@ -1,2 +1,16 @@
+# Scala/Java
 *.class
-*.log
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# IDE
+.idea
+*.iml
+
+# gradle
+/build
+.gradle
+
