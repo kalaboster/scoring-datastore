@@ -1,0 +1,9 @@
+task testng(type: Test) {
+    useTestNG()
+    maxHeapSize = "4g"
+}
+
+test {
+    useJUnit()
+    maxHeapSize = "4g"
+}
