@@ -1,0 +1,5 @@
+bootJar {
+    baseName = 'scoring-datastore'
+    version =  '0.1.0'
+}
+
