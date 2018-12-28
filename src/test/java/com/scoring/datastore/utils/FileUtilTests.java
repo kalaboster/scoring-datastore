@@ -1,10 +1,14 @@
 package com.scoring.datastore.utils;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 
+
+@RunWith(SpringRunner.class)
 public class FileUtilTests {
 
     @Test
