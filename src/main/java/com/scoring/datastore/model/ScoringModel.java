@@ -56,4 +56,11 @@ public class ScoringModel {
     public void setViewTime(String viewTime) {
         this.viewTime = viewTime;
     }
+
+    @Override
+    public String toString() {
+        return "{ \"rev\":\"" + rev + "\", " +
+                "\"viewTime\":\"" + viewTime + "\" " +
+                "}";
+    }
 }
