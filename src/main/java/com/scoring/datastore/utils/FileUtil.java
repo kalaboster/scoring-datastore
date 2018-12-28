@@ -1,10 +1,13 @@
 package com.scoring.datastore.utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 public class FileUtil {
@@ -32,5 +35,22 @@ public class FileUtil {
         }
         return contentBuilder.toString();
 
+    }
+
+    public static Properties readPropertiesFileToStream(String propertiesFile) throws IOException {
+
+        Properties properties = new Properties();
+
+        if (propertiesFile.isEmpty()) {
+            throw new FileNotFoundException("Missing properties file.");
+        }
+
+        InputStream propertiesStream = FileUtil.class.getResourceAsStream(propertiesFile);
+
+        if (propertiesStream != null) {
+            properties.load(propertiesStream);
+        }
+
+        return properties;
     }
 }
