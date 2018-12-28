@@ -1,6 +1,8 @@
 package com.scoring.datastore.service;
 
 import com.scoring.datastore.model.ScoringModel;
+import com.scoring.datastore.model.ScoringValidator;
+import com.scoring.datastore.model.ScoringValidatorException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -83,7 +85,16 @@ public class StoreScoringService implements ScoringService {
     @Override
     public boolean validate(ScoringModel scoringModel) {
 
-        return true;
+        boolean valid = true;
+
+        try {
+            ScoringValidator scoringValidator = new ScoringValidator(scoringModel);
+            scoringValidator.validate();
+        } catch (ScoringValidatorException e) {
+            valid = false;
+        }
+
+        return valid;
     }
 
 
