@@ -6,6 +6,7 @@ repositories {
 dependencies {
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
     
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
