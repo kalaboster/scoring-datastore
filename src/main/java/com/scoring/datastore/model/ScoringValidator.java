@@ -1,12 +1,12 @@
 package com.scoring.datastore.model;
 
-class ScoreValidator {
+class ScoringValidator {
 
-    private ValidScoreBuilder validScoreBuilder;
+    private ScoringValidatorBuilder validScoreBuilder;
 
 
-    ScoreValidator(ScoringModel scoringModel) {
-        this.validScoreBuilder = new ValidScoreBuilder(scoringModel);
+    ScoringValidator(ScoringModel scoringModel) {
+        this.validScoreBuilder = new ScoringValidatorBuilder(scoringModel);
     }
 
     void validate(){
