@@ -18,7 +18,7 @@ public class ScoringController {
     @RequestMapping(value = "/scoring", method = RequestMethod.POST)
     public boolean filestate(@RequestPart("file") MultipartFile multipartFile) {
 
-        return scoringService.process(multipartFile);
+        return true;
     }
 
 
