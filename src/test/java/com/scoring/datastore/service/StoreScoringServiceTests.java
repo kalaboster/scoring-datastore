@@ -26,7 +26,7 @@ public class StoreScoringServiceTests {
 
     @Test
     public void testTransformSuccess() throws Exception {
-        File testFile = FileUtil.readResourceFile("/datastoreInput.txt");
+        File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
         byte[] fileBytes = Files.readAllBytes(testFile.toPath());
         MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
 
@@ -43,7 +43,7 @@ public class StoreScoringServiceTests {
 
     @Test
     public void testBuildSuccess() throws Exception {
-        File testFile = FileUtil.readResourceFile("/datastoreInput.txt");
+        File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
         byte[] fileBytes = Files.readAllBytes(testFile.toPath());
         MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
 
@@ -79,6 +79,27 @@ public class StoreScoringServiceTests {
         scoringModel.setRev("12.00");
 
         Assert.assertFalse(storeScoringService.validate(scoringModel));
+    }
+
+    @Test
+    public void testInitStoreSuccessful() {
+
+        ScoringModel scoringModel = new ScoringModel();
+        scoringModel.setTitle("Title");
+        scoringModel.setStb("ShortSTB");
+        scoringModel.setProvidor("Provider");
+        scoringModel.setDate("2014-04-03");
+        scoringModel.setViewTime("2:400");
+        scoringModel.setRev("12.00");
+
+        StoreScoringService storeScoringService = new StoreScoringService();
+        storeScoringService.init();
+        storeScoringService.store(scoringModel);
+
+        Assert.assertTrue(new File("./scoring-datastore/provider/shortstb_title_2014-04-03.json").isFile());
+        new File("./scoring-datastore/provider/shortstb_title_2014-04-03.json").delete();
+        new File("./scoring-datastore/provider").delete();
+        new File("./scoring-datastore").delete();
     }
 
 }
