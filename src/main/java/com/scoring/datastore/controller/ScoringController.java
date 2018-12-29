@@ -1,9 +1,15 @@
 package com.scoring.datastore.controller;
 
+import com.scoring.datastore.model.ScoringModel;
 import com.scoring.datastore.service.ScoringService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @RestController
 public class ScoringController {
@@ -18,8 +24,19 @@ public class ScoringController {
     @RequestMapping(value = "/scoring", method = RequestMethod.POST)
     public boolean filestate(@RequestPart("file") MultipartFile multipartFile) {
 
-        return true;
-    }
+        boolean successful = true;
 
+        scoringService.init();
+        File file = scoringService.transform(multipartFile);
+        for (ScoringModel scoringModel : scoringService.build(file)) {
+            if (!scoringService.validate(scoringModel)) {
+                successful = false;
+                continue;
+            }
+            scoringService.store(scoringModel);
+        }
+
+        return successful;
+    }
 
 }
