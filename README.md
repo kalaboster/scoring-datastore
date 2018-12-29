@@ -27,6 +27,19 @@ All other requiremnts are defined in the build.gradle file and related files.
 
 1. *./gradlew bootRun*
 
-2. Navigate in browser to: *http://localhost:8080/api/scoring/swagger-ui.html*
+2. Navigate in browser to: *http://localhost:8080/api/swagger-ui.html*
 
-3. Use Swagger interface to send requests and view responses.
+**End2End Scoring Post (Store)**
+
+1. Click on *scoring-controller*.
+
+2. Click on *Post*.
+
+3. Click on *Try it out*.
+
+4. Click on *Choose File*.
+
+5. Choose the file *<this.root>/src/test/resources/com/scoring/datastore/datastoreInput.txt*.
+
+6. Click *Execute*
+            
