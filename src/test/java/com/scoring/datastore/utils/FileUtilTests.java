@@ -15,7 +15,7 @@ public class FileUtilTests {
     @Test
     public void testReadResourceToString() throws Exception {
 
-        File file = FileUtil.readResourceFile("/datastoreInput.txt");
+        File file = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
         String testString = FileUtil.readFileToString(file);
 
         Assert.assertTrue(testString.startsWith("STB|TITLE|PROVIDER|DATE|REV|VIEW_TIME"));
