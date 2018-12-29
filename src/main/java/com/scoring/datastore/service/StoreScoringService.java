@@ -69,7 +69,7 @@ public class StoreScoringService implements ScoringService {
                 scoringModel.setProvidor(csvRecord.get("PROVIDER"));
                 scoringModel.setDate(csvRecord.get("DATE"));
                 scoringModel.setRev(csvRecord.get("REV"));
-                scoringModel.setRev(csvRecord.get("VIEW_TIME"));
+                scoringModel.setViewTime(csvRecord.get("VIEW_TIME"));
 
                 scoringModels.add(scoringModel);
             }
