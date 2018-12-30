@@ -106,4 +106,11 @@ public class StoreScoringService implements ScoringService {
         return true;
     }
 
+    @Override
+    public List<ScoringModel> query(ScoringQueryModel scoringQueryModel) {
+
+
+        return new LinkedList<ScoringModel>();
+    }
+
 }
