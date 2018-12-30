@@ -59,7 +59,7 @@ public class StoreScoringServiceTests {
         ScoringModel scoringModel = new ScoringModel();
         scoringModel.setTitle("Title");
         scoringModel.setStb("ShortSTB");
-        scoringModel.setProvidor("Provider");
+        scoringModel.setProvider("Provider");
         scoringModel.setDate("2014-04-03");
         scoringModel.setViewTime("2:40");
         scoringModel.setRev("12.00");
@@ -73,7 +73,7 @@ public class StoreScoringServiceTests {
         ScoringModel scoringModel = new ScoringModel();
         scoringModel.setTitle("Title");
         scoringModel.setStb("ShortSTB");
-        scoringModel.setProvidor("Provider");
+        scoringModel.setProvider("Provider");
         scoringModel.setDate("2014-04-03");
         scoringModel.setViewTime("2:400");
         scoringModel.setRev("12.00");
@@ -87,7 +87,7 @@ public class StoreScoringServiceTests {
         ScoringModel scoringModel = new ScoringModel();
         scoringModel.setTitle("Title");
         scoringModel.setStb("ShortSTB");
-        scoringModel.setProvidor("Provider");
+        scoringModel.setProvider("Provider");
         scoringModel.setDate("2014-04-03");
         scoringModel.setViewTime("2:400");
         scoringModel.setRev("12.00");
