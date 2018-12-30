@@ -1,6 +1,7 @@
 package com.scoring.datastore.service;
 
 import com.scoring.datastore.model.ScoringModel;
+import com.scoring.datastore.model.ScoringQueryModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -18,4 +19,5 @@ public interface ScoringService {
 
     boolean store(ScoringModel scoringModel);
 
+    List<ScoringModel> query(ScoringQueryModel scoringQueryModel);
 }
