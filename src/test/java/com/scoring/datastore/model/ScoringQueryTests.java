@@ -1,7 +1,11 @@
 package com.scoring.datastore.model;
 
+import com.scoring.datastore.utils.FileUtil;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.File;
+import java.util.List;
 
 public class ScoringQueryTests {
 
@@ -13,6 +17,38 @@ public class ScoringQueryTests {
 
         Assert.assertEquals(new Integer(0), scoringQueryModel.getOrder().getDate());
         Assert.assertEquals(true, scoringQueryModel.getSelect().isDate());
+
+    }
+
+    @Test
+    public void testLoadPath() throws Exception {
+
+        File file = FileUtil.readResourceFile("/scoring-datastore-test/buena vista/stb1_unbreakable_2014-04-03.json");
+        ScoringQuery scoringQuery = new ScoringQuery();
+        ScoringModel scoringModel = new ScoringModel();
+
+        scoringQuery.loadFilePath(scoringModel, file.getAbsolutePath(), "scoring-datastore-test");
+
+        Assert.assertEquals("2014-04-03", scoringModel.getDate());
+    }
+
+    @Test
+    public void testLoadFile() throws Exception {
+
+        File file = FileUtil.readResourceFile("/scoring-datastore-test/buena vista/stb1_unbreakable_2014-04-03.json");
+        ScoringQuery scoringQuery = new ScoringQuery();
+        ScoringModel scoringModel = new ScoringModel();
+
+        scoringQuery.loadFile(scoringModel, file.getAbsolutePath());
+
+        Assert.assertEquals("2:05", scoringModel.getViewTime());
+    }
+
+    //@Test
+    public void testLoadStoreSuccess() {
+
+        ScoringQuery scoringQuery = new ScoringQuery();
+        List<ScoringModel> scoringModels = scoringQuery.loadStore("/home/kalab/github/scoring-datastore-test/src/test/resources/scoring-datastore-test");
 
     }
 
