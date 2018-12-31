@@ -8,6 +8,9 @@ public interface ScoringQueryBuilder {
 
     List<ScoringModel> loadStore(String pathStore);
 
-    List<ScoringQueryModel> query(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels);
+    List<ScoringQueryModel> select(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels);
 
+    List<ScoringQueryModel> order(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels);
+
+    List<ScoringQueryModel> filter(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels);
 }
