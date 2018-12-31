@@ -96,10 +96,10 @@ public class StoreScoringServiceTests {
         storeScoringService.init();
         storeScoringService.store(scoringModel);
 
-        Assert.assertTrue(new File("./scoring-datastore/provider/shortstb_title_2014-04-03.json").isFile());
-        new File("./scoring-datastore/provider/shortstb_title_2014-04-03.json").delete();
-        new File("./scoring-datastore/provider").delete();
-        new File("./scoring-datastore").delete();
+        Assert.assertTrue(new File("scoring-datastore-test/provider/shortstb_title_2014-04-03.json").isFile());
+        new File("scoring-datastore-test/provider/shortstb_title_2014-04-03.json").delete();
+        new File("scoring-datastore-test/provider").delete();
+        new File("scoring-datastore-test").delete();
     }
 
 }
