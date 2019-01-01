@@ -98,20 +98,25 @@ public class StoreScoringService implements ScoringService {
 
 
     @Override
-    public boolean store(ScoringModel scoringModel) {
+    public boolean store(ScoringModel scoringModel, String dataStoreName) {
 
         ScoringStorer scoringStorer = new ScoringModelStorer();
-        scoringStorer.makeRecord(scoringModel, "./scoring-datastore-default");
+        scoringStorer.makeRecord(scoringModel, "./" + dataStoreName);
 
         return true;
     }
 
     @Override
-    public List<ScoringModel> query(ScoringQueryModel scoringQueryModel) {
+    public List<ScoringModel> query(ScoringQueryModel scoringQueryModel, String dataStoreName) {
 
         ScoringQuery scoringQuery = new ScoringQuery();
+        scoringQuery.loadStore("./", dataStoreName);
 
-        return scoringQuery.loadStore("./", "scoring-datastore-default");
+        List<ScoringModel> scoringModels = scoringQuery.loadStore("./", dataStoreName);
+        scoringQuery.select(scoringQueryModel, scoringModels);
+        scoringQuery.filter(scoringQueryModel, scoringModels);
+
+        return scoringModels;
     }
 
 }
