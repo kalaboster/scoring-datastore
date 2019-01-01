@@ -33,14 +33,14 @@ public class ScoringQueryModel {
         this.filter = filter;
     }
 
-    static class Select {
+    public static class Select {
 
-        boolean stb;
-        boolean title;
-        boolean provider;
-        boolean date;
-        boolean rev;
-        boolean viewTime;
+        private boolean stb;
+        private boolean title;
+        private boolean provider;
+        private boolean date;
+        private boolean rev;
+        private boolean viewTime;
 
         public boolean isStb() {
             return stb;
@@ -91,14 +91,14 @@ public class ScoringQueryModel {
         }
     }
 
-    static class Order {
+    public static class Order {
 
-        Integer stb;
-        Integer title;
-        Integer provider;
-        Integer date;
-        Integer rev;
-        Integer viewTime;
+        private Integer stb;
+        private Integer title;
+        private Integer provider;
+        private Integer date;
+        private Integer rev;
+        private Integer viewTime;
 
         public Integer getStb() {
             return stb;
@@ -150,9 +150,9 @@ public class ScoringQueryModel {
     }
 
 
-    static class Filter {
+    public static class Filter {
 
-        Map<String, String> map;
+        private Map<String, String> map;
 
         public Map<String, String> getMap() {
             return map;
