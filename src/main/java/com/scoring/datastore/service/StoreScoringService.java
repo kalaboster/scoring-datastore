@@ -20,7 +20,7 @@ public class StoreScoringService implements ScoringService {
     @Override
     public void init() {
         ScoringModelStorer scoringModelStorer = new ScoringModelStorer();
-        scoringModelStorer.init("./scoring-datastore");
+        scoringModelStorer.init("./scoring-datastore-default");
     }
 
     @Override
@@ -101,7 +101,7 @@ public class StoreScoringService implements ScoringService {
     public boolean store(ScoringModel scoringModel) {
 
         ScoringStorer scoringStorer = new ScoringModelStorer();
-        scoringStorer.makeRecord(scoringModel, "./scoring-datastore");
+        scoringStorer.makeRecord(scoringModel, "./scoring-datastore-default");
 
         return true;
     }
