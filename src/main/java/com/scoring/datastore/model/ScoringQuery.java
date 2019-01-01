@@ -2,8 +2,8 @@ package com.scoring.datastore.model;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,23 +39,26 @@ public class ScoringQuery implements ScoringQueryBuilder {
     }
 
     @Override
-    public List<ScoringModel> loadStore(String pathStore) {
+    public List<ScoringModel> loadStore(String pathToStore, String datastore) {
 
         List<ScoringModel> scoringModels = new LinkedList<>();
 
+
+        File folder = new File(pathToStore + datastore);
         try {
-            for (Path path : Files.newDirectoryStream(Paths.get(pathStore),
-                    path -> path.toString().endsWith(".json")).iterator().next()) {
-                ScoringModel scoringModel = new ScoringModel();
+            for (File file : folder.listFiles()) {
+                for (File f : file.listFiles()) {
+                    ScoringModel scoringModel = new ScoringModel();
 
-                //loadFilePath(scoringModel, "string", pathStore);
-                //loodFile(scoringModel, "string");
+                    loadFilePath(scoringModel, f.toString(), datastore);
+                    loadFile(scoringModel, f.toString());
 
-                scoringModels.add(scoringModel);
+                    scoringModels.add(scoringModel);
+                }
             }
 
         } catch (Exception e) {
-            throw new ScoringQueryException("error");
+            throw new ScoringQueryException("Error loadStore has error.");
         }
 
         return scoringModels;
@@ -83,9 +86,9 @@ public class ScoringQuery implements ScoringQueryBuilder {
     }
 
 
-    protected void loadFilePath(ScoringModel scoringModel, String file, String dbName) {
+    protected void loadFilePath(ScoringModel scoringModel, String file, String dataStore) {
 
-        String[] parts = file.split(dbName);
+        String[] parts = file.split(dataStore);
         String[] strings = parts[1].split("(/|_)");
         scoringModel.setProvider(strings[1]);
         scoringModel.setStb(strings[2]);
