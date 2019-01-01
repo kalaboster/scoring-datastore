@@ -6,7 +6,7 @@ public interface ScoringQueryBuilder {
 
     ScoringQueryModel generateDefault();
 
-    List<ScoringModel> loadStore(String pathStore);
+    List<ScoringModel> loadStore(String pathStore, String datastore);
 
     List<ScoringQueryModel> select(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels);
 
