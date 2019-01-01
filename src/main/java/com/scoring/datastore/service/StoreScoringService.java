@@ -109,8 +109,9 @@ public class StoreScoringService implements ScoringService {
     @Override
     public List<ScoringModel> query(ScoringQueryModel scoringQueryModel) {
 
+        ScoringQuery scoringQuery = new ScoringQuery();
 
-        return new LinkedList<ScoringModel>();
+        return scoringQuery.loadStore("./", "scoring-datastore-default");
     }
 
 }
