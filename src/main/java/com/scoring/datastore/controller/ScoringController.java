@@ -2,12 +2,10 @@ package com.scoring.datastore.controller;
 
 import com.scoring.datastore.model.ScoringModel;
 import com.scoring.datastore.model.ScoringQuery;
+import com.scoring.datastore.model.ScoringQueryModel;
 import com.scoring.datastore.service.ScoringService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -23,16 +21,19 @@ public class ScoringController {
         this.scoringService = scoringService;
     }
 
-    @RequestMapping(value = "/scoring", method = RequestMethod.GET)
-    public List<ScoringModel> getStore() {
+    @RequestMapping(value = "/scoring/query", method = RequestMethod.POST)
+    public List<ScoringModel> query(@RequestBody ScoringQueryModel scoringQueryModel) {
 
         ScoringQuery scoringQuery = new ScoringQuery();
-        return scoringService.query(scoringQuery.generateDefault());
+        if (scoringQueryModel == null) {
+            scoringQueryModel = scoringQuery.generateDefault();
+        }
 
+        return scoringService.query(scoringQueryModel, "scoring-datastore-default");
     }
 
-    @RequestMapping(value = "/scoring", method = RequestMethod.POST)
-    public boolean filestate(@RequestPart("file") MultipartFile multipartFile) {
+    @RequestMapping(value = "/scoring/store", method = RequestMethod.POST)
+    public boolean store(@RequestPart("file") MultipartFile multipartFile) {
 
         boolean successful = true;
 
@@ -43,7 +44,7 @@ public class ScoringController {
                 successful = false;
                 continue;
             }
-            scoringService.store(scoringModel);
+            scoringService.store(scoringModel, "scoring-datastore-default");
         }
 
         return successful;
