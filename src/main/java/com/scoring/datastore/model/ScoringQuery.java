@@ -99,25 +99,27 @@ public class ScoringQuery implements ScoringQueryBuilder {
     @Override
     public List<ScoringModel> filter(ScoringQueryModel scoringQueryModel, List<ScoringModel> filteredScoringModels) {
 
-        if (scoringQueryModel.getSelect().isDate() && scoringQueryModel.getFilter().getMap().keySet().contains("DATE")) {
-            filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getDate().equals(scoringQueryModel.getFilter().getMap().get("DATE")))).collect(Collectors.toList()));
-        }
-        if (scoringQueryModel.getSelect().isProvider() && scoringQueryModel.getFilter().getMap().keySet().contains("PROVIDER")) {
-            filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getProvider().equals(scoringQueryModel.getFilter().getMap().get("PROVIDER")))).collect(Collectors.toList()));
-        }
-        if (scoringQueryModel.getSelect().isRev() && scoringQueryModel.getFilter().getMap().keySet().contains("REV")) {
-            filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getRev().equals(scoringQueryModel.getFilter().getMap().get("REV")))).collect(Collectors.toList()));
-        }
-        if (scoringQueryModel.getSelect().isStb() && scoringQueryModel.getFilter().getMap().keySet().contains("STB")) {
-            filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getStb().equals(scoringQueryModel.getFilter().getMap().get("STB")))).collect(Collectors.toList()));
-        }
-        if (scoringQueryModel.getSelect().isTitle() && scoringQueryModel.getFilter().getMap().keySet().contains("TITLE")) {
-            filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getTitle().equals(scoringQueryModel.getFilter().getMap().get("TITLE")))).collect(Collectors.toList()));
-        }
-        if (scoringQueryModel.getSelect().isViewTime() && scoringQueryModel.getFilter().getMap().keySet().contains("VIEW_TIME")) {
-            filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getViewTime().equals(scoringQueryModel.getFilter().getMap().get("VIEW_TIME")))).collect(Collectors.toList()));
-        }
+        if (scoringQueryModel.getFilter().getMap() != null) {
 
+            if (scoringQueryModel.getSelect().isDate() && scoringQueryModel.getFilter().getMap().keySet().contains("DATE")) {
+                filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getDate().equals(scoringQueryModel.getFilter().getMap().get("DATE")))).collect(Collectors.toList()));
+            }
+            if (scoringQueryModel.getSelect().isProvider() && scoringQueryModel.getFilter().getMap().keySet().contains("PROVIDER")) {
+                filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getProvider().equals(scoringQueryModel.getFilter().getMap().get("PROVIDER")))).collect(Collectors.toList()));
+            }
+            if (scoringQueryModel.getSelect().isRev() && scoringQueryModel.getFilter().getMap().keySet().contains("REV")) {
+                filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getRev().equals(scoringQueryModel.getFilter().getMap().get("REV")))).collect(Collectors.toList()));
+            }
+            if (scoringQueryModel.getSelect().isStb() && scoringQueryModel.getFilter().getMap().keySet().contains("STB")) {
+                filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getStb().equals(scoringQueryModel.getFilter().getMap().get("STB")))).collect(Collectors.toList()));
+            }
+            if (scoringQueryModel.getSelect().isTitle() && scoringQueryModel.getFilter().getMap().keySet().contains("TITLE")) {
+                filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getTitle().equals(scoringQueryModel.getFilter().getMap().get("TITLE")))).collect(Collectors.toList()));
+            }
+            if (scoringQueryModel.getSelect().isViewTime() && scoringQueryModel.getFilter().getMap().keySet().contains("VIEW_TIME")) {
+                filteredScoringModels.removeAll(filteredScoringModels.stream().filter((f -> !f.getViewTime().equals(scoringQueryModel.getFilter().getMap().get("VIEW_TIME")))).collect(Collectors.toList()));
+            }
+        }
         return filteredScoringModels;
     }
 
