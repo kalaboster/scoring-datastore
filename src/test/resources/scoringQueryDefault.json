@@ -1,0 +1,22 @@
+{
+  "select": {
+    "stb": false,
+    "title": true,
+    "provider": true,
+    "date": true,
+    "rev": false,
+    "viewTime": true
+  },
+  "order": {
+    "title": 0,
+    "provider": 0,
+    "date": 0,
+    "rev": 0,
+    "viewTime": 0
+  },
+  "filter": {
+    "map": {
+      "DATE": "2014-04-02"
+    }
+  }
+}
