@@ -17,7 +17,7 @@ public interface ScoringService {
 
     boolean validate(ScoringModel scoringModel);
 
-    boolean store(ScoringModel scoringModel);
+    boolean store(ScoringModel scoringModel, String dataStoreName);
 
-    List<ScoringModel> query(ScoringQueryModel scoringQueryModel);
+    List<ScoringModel> query(ScoringQueryModel scoringQueryModel, String dataStoreName);
 }
