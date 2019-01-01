@@ -17,7 +17,7 @@ public class ScoringQueryTests {
         ScoringQueryModel scoringQueryModel = scoringQuery.generateDefault();
 
         Assert.assertEquals(new Integer(0), scoringQueryModel.getOrder().getDate());
-        Assert.assertEquals(true, scoringQueryModel.getSelect().isDate());
+        Assert.assertTrue(scoringQueryModel.getSelect().isDate());
 
     }
 
@@ -53,6 +53,23 @@ public class ScoringQueryTests {
         List<ScoringModel> scoringModels = scoringQuery.loadStore(file.getAbsolutePath(), "/scoring-datastore-test");
 
         Assert.assertEquals("1:05", scoringModels.get(0).getViewTime());
+    }
+
+
+    @Test
+    public void testSelectSuccess() throws Exception {
+
+        File file = readResourceFile("/rootdir");
+        ScoringQuery scoringQuery = new ScoringQuery();
+        List<ScoringModel> scoringModels = scoringQuery.loadStore(file.getAbsolutePath(), "/scoring-datastore-test");
+
+        ScoringQueryModel scoringQueryModel = scoringQuery.generateDefault();
+        scoringQueryModel.getSelect().setDate(false);
+        scoringQueryModel.getSelect().setTitle(false);
+
+        List<ScoringModel> returnList = scoringQuery.select(scoringQueryModel, scoringModels);
+
+        Assert.assertNull(returnList.get(0).getDate());
     }
 
 }
