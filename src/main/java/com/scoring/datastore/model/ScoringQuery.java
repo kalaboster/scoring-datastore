@@ -65,24 +65,41 @@ public class ScoringQuery implements ScoringQueryBuilder {
     }
 
     @Override
-    public List<ScoringQueryModel> select(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels) {
+    public List<ScoringModel> select(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels) {
 
+        if(!scoringQueryModel.getSelect().isDate()){
+            scoringModels.forEach(s -> s.setDate(null));
+        }
+        if(!scoringQueryModel.getSelect().isProvider()){
+            scoringModels.forEach(s -> s.setProvider(null));
+        }
+        if(!scoringQueryModel.getSelect().isRev()){
+            scoringModels.forEach(s -> s.setRev(null));
+        }
+        if(!scoringQueryModel.getSelect().isStb()){
+            scoringModels.forEach(s -> s.setStb(null));
+        }
+        if(!scoringQueryModel.getSelect().isTitle()){
+            scoringModels.forEach(s -> s.setTitle(null));
+        }
+        if(!scoringQueryModel.getSelect().isViewTime()){
+            scoringModels.forEach(s -> s.setViewTime(null));
+        }
 
-        return new LinkedList<ScoringQueryModel>();
+        return scoringModels;
     }
 
     @Override
-    public List<ScoringQueryModel> order(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels) {
+    public List<ScoringModel> order(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels) {
 
-
-        return new LinkedList<ScoringQueryModel>();
+        return new LinkedList<ScoringModel>();
     }
 
     @Override
-    public List<ScoringQueryModel> filter(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels) {
+    public List<ScoringModel> filter(ScoringQueryModel scoringQueryModel, List<ScoringModel> scoringModels) {
 
 
-        return new LinkedList<ScoringQueryModel>();
+        return new LinkedList<ScoringModel>();
     }
 
 
