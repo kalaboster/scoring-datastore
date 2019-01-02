@@ -37,10 +37,9 @@ public class ScoringControllerIntegrationTests {
     public void testScoringEndpointToDataStore() {
         ClassPathResource resource = new ClassPathResource("datastoreInput.txt", getClass());
 
-
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
         map.add("file", resource);
-        ResponseEntity<String> response = this.testRestTemplate.postForEntity("/scoring", map, String.class);
+        ResponseEntity<String> response = this.testRestTemplate.postForEntity("/scoring/store", map, String.class);
 
         assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
         then(scoringService).should().init();
