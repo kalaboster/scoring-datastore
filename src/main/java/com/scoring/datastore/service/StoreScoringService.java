@@ -56,7 +56,12 @@ public class StoreScoringService implements ScoringService {
             char delimit = '|';
             CSVParser parser = CSVParser.parse(file, Charset.defaultCharset(), CSVFormat.DEFAULT
                     .withDelimiter(delimit)
-                    .withHeader("STB", "TITLE", "PROVIDER", "DATE", "REV", "VIEW_TIME")
+                    .withHeader(ScoringModel.StoreColumns.STB.getText(),
+                            ScoringModel.StoreColumns.TITLE.getText(),
+                            ScoringModel.StoreColumns.PROVIDER.getText(),
+                            ScoringModel.StoreColumns.DATE.getText(),
+                            ScoringModel.StoreColumns.REV.getText(),
+                            ScoringModel.StoreColumns.VIEW_TIME.getText())
                     .withSkipHeaderRecord()
                     .withIgnoreHeaderCase()
                     .withTrim());
@@ -64,12 +69,12 @@ public class StoreScoringService implements ScoringService {
             for (CSVRecord csvRecord : parser) {
                 ScoringModel scoringModel = new ScoringModel();
 
-                scoringModel.setStb(csvRecord.get("STB"));
-                scoringModel.setTitle(csvRecord.get("TITLE"));
-                scoringModel.setProvider(csvRecord.get("PROVIDER"));
-                scoringModel.setDate(csvRecord.get("DATE"));
-                scoringModel.setRev(csvRecord.get("REV"));
-                scoringModel.setViewTime(csvRecord.get("VIEW_TIME"));
+                scoringModel.setStb(csvRecord.get(ScoringModel.StoreColumns.STB.getText()));
+                scoringModel.setTitle(csvRecord.get(ScoringModel.StoreColumns.TITLE.getText()));
+                scoringModel.setProvider(csvRecord.get(ScoringModel.StoreColumns.PROVIDER.getText()));
+                scoringModel.setDate(csvRecord.get(ScoringModel.StoreColumns.DATE.getText()));
+                scoringModel.setRev(csvRecord.get(ScoringModel.StoreColumns.REV.getText()));
+                scoringModel.setViewTime(csvRecord.get(ScoringModel.StoreColumns.VIEW_TIME.getText()));
 
                 scoringModels.add(scoringModel);
             }
