@@ -26,11 +26,12 @@ public class FileUtil {
 
     }
 
-    static String readFileToString(File file) throws IOException {
+    public static String readFileToString(File file) throws IOException {
 
         StringBuilder contentBuilder = new StringBuilder();
 
-        try (Stream<String> stream = Files.lines(Paths.get(file.getPath()), StandardCharsets.UTF_8)) {
+
+        try (Stream<String> stream = Files.lines(Paths.get(file.getPath().replaceAll("%20", " ")), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s).append("\n"));
         }
         return contentBuilder.toString();

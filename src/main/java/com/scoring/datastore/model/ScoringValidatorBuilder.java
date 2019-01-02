@@ -30,11 +30,11 @@ public class ScoringValidatorBuilder implements ScoringBuilder {
 
     @Override
     public void validateProvidor() {
-        if (this.scoringModel.getProvidor() == null) {
+        if (this.scoringModel.getProvider() == null) {
             throw new ScoringValidatorException("Provider is null.");
         }
-        if (this.scoringModel.getProvidor().length() > 63) {
-            throw new ScoringValidatorException("Providor length needs to be 64 characgters not: " + this.scoringModel.getProvidor().length() + 1);
+        if (this.scoringModel.getProvider().length() > 63) {
+            throw new ScoringValidatorException("Providor length needs to be 64 characgters not: " + this.scoringModel.getProvider().length() + 1);
         }
     }
 

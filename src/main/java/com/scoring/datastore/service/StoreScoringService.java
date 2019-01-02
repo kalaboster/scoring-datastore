@@ -18,9 +18,9 @@ import java.util.List;
 public class StoreScoringService implements ScoringService {
 
     @Override
-    public void init() {
+    public void init(String root, String dataStoreName) {
         ScoringModelStorer scoringModelStorer = new ScoringModelStorer();
-        scoringModelStorer.init("./scoring-datastore");
+        scoringModelStorer.init(root + File.separator + dataStoreName);
     }
 
     @Override
@@ -56,7 +56,12 @@ public class StoreScoringService implements ScoringService {
             char delimit = '|';
             CSVParser parser = CSVParser.parse(file, Charset.defaultCharset(), CSVFormat.DEFAULT
                     .withDelimiter(delimit)
-                    .withHeader("STB", "TITLE", "PROVIDER", "DATE", "REV", "VIEW_TIME")
+                    .withHeader(ScoringModel.StoreColumns.STB.getText(),
+                            ScoringModel.StoreColumns.TITLE.getText(),
+                            ScoringModel.StoreColumns.PROVIDER.getText(),
+                            ScoringModel.StoreColumns.DATE.getText(),
+                            ScoringModel.StoreColumns.REV.getText(),
+                            ScoringModel.StoreColumns.VIEW_TIME.getText())
                     .withSkipHeaderRecord()
                     .withIgnoreHeaderCase()
                     .withTrim());
@@ -64,12 +69,12 @@ public class StoreScoringService implements ScoringService {
             for (CSVRecord csvRecord : parser) {
                 ScoringModel scoringModel = new ScoringModel();
 
-                scoringModel.setStb(csvRecord.get("STB"));
-                scoringModel.setTitle(csvRecord.get("TITLE"));
-                scoringModel.setProvidor(csvRecord.get("PROVIDER"));
-                scoringModel.setDate(csvRecord.get("DATE"));
-                scoringModel.setRev(csvRecord.get("REV"));
-                scoringModel.setViewTime(csvRecord.get("VIEW_TIME"));
+                scoringModel.setStb(csvRecord.get(ScoringModel.StoreColumns.STB.getText()));
+                scoringModel.setTitle(csvRecord.get(ScoringModel.StoreColumns.TITLE.getText()));
+                scoringModel.setProvider(csvRecord.get(ScoringModel.StoreColumns.PROVIDER.getText()));
+                scoringModel.setDate(csvRecord.get(ScoringModel.StoreColumns.DATE.getText()));
+                scoringModel.setRev(csvRecord.get(ScoringModel.StoreColumns.REV.getText()));
+                scoringModel.setViewTime(csvRecord.get(ScoringModel.StoreColumns.VIEW_TIME.getText()));
 
                 scoringModels.add(scoringModel);
             }
@@ -98,12 +103,25 @@ public class StoreScoringService implements ScoringService {
 
 
     @Override
-    public boolean store(ScoringModel scoringModel) {
+    public boolean store(ScoringModel scoringModel, String root, String dataStoreName) {
 
         ScoringStorer scoringStorer = new ScoringModelStorer();
-        scoringStorer.makeRecord(scoringModel, "./scoring-datastore");
+        scoringStorer.makeRecord(scoringModel, root + File.separator + dataStoreName);
 
         return true;
+    }
+
+    @Override
+    public List<ScoringModel> query(ScoringQueryModel scoringQueryModel, String root, String dataStoreName) {
+
+        ScoringQuery scoringQuery = new ScoringQuery();
+        scoringQuery.loadStore(root + File.separator, dataStoreName);
+
+        List<ScoringModel> scoringModels = scoringQuery.loadStore(root + File.separator, dataStoreName);
+        scoringQuery.select(scoringQueryModel, scoringModels);
+        scoringQuery.filter(scoringQueryModel, scoringModels);
+
+        return scoringModels;
     }
 
 }

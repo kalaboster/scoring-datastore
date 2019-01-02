@@ -26,7 +26,7 @@ public class FileUtilTests {
 
         Properties properties = FileUtil.readPropertiesFileToStream("/application.properties");
 
-        Assert.assertEquals("./scoring-datastore", properties.getProperty("scoring.store.root"));
+        Assert.assertEquals("scoring-datastore-default", properties.getProperty("scoring.datastore.name"));
 
     }
 

@@ -1,6 +1,8 @@
 package com.scoring.datastore.service;
 
 import com.scoring.datastore.model.ScoringModel;
+import com.scoring.datastore.model.ScoringQuery;
+import com.scoring.datastore.model.ScoringQueryModel;
 import com.scoring.datastore.utils.FileUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -12,7 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 public class StoreScoringServiceTests {
@@ -59,7 +63,7 @@ public class StoreScoringServiceTests {
         ScoringModel scoringModel = new ScoringModel();
         scoringModel.setTitle("Title");
         scoringModel.setStb("ShortSTB");
-        scoringModel.setProvidor("Provider");
+        scoringModel.setProvider("Provider");
         scoringModel.setDate("2014-04-03");
         scoringModel.setViewTime("2:40");
         scoringModel.setRev("12.00");
@@ -73,7 +77,7 @@ public class StoreScoringServiceTests {
         ScoringModel scoringModel = new ScoringModel();
         scoringModel.setTitle("Title");
         scoringModel.setStb("ShortSTB");
-        scoringModel.setProvidor("Provider");
+        scoringModel.setProvider("Provider");
         scoringModel.setDate("2014-04-03");
         scoringModel.setViewTime("2:400");
         scoringModel.setRev("12.00");
@@ -87,19 +91,61 @@ public class StoreScoringServiceTests {
         ScoringModel scoringModel = new ScoringModel();
         scoringModel.setTitle("Title");
         scoringModel.setStb("ShortSTB");
-        scoringModel.setProvidor("Provider");
+        scoringModel.setProvider("Provider");
         scoringModel.setDate("2014-04-03");
         scoringModel.setViewTime("2:400");
         scoringModel.setRev("12.00");
 
         StoreScoringService storeScoringService = new StoreScoringService();
-        storeScoringService.init();
-        storeScoringService.store(scoringModel);
+        storeScoringService.init(".", "scoring-datastore-default");
+        storeScoringService.store(scoringModel, ".", "scoring-datastore-default");
 
-        Assert.assertTrue(new File("./scoring-datastore/provider/shortstb_title_2014-04-03.json").isFile());
-        new File("./scoring-datastore/provider/shortstb_title_2014-04-03.json").delete();
-        new File("./scoring-datastore/provider").delete();
-        new File("./scoring-datastore").delete();
+        Assert.assertTrue(new File("scoring-datastore-default/provider/shortstb_title_2014-04-03.json").isFile());
+        new File("scoring-datastore-default/provider/shortstb_title_2014-04-03.json").delete();
+        new File("scoring-datastore-default/provider").delete();
+        new File("scoring-datastore-default").delete();
+    }
+
+    @Test
+    public void testQueryFilterSuccess() throws Exception {
+
+        File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
+        byte[] fileBytes = Files.readAllBytes(testFile.toPath());
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
+
+        File file = storeScoringService.transform(mockMultipartFile);
+        storeScoringService.build(file);
+        ScoringQuery scoringQuery = new ScoringQuery();
+        StoreScoringService storeScoringService = new StoreScoringService();
+
+        Map<String, String> filterMap = new HashMap<>();
+        filterMap.put("DATE", "2014-04-02");
+
+        ScoringQueryModel scoringQueryModel = scoringQuery.generateDefault();
+        scoringQueryModel.getFilter().setMap(filterMap);
+
+        storeScoringService.init(".", "out/test/resources/rootdir/scoring-datastore-test");
+        List<ScoringModel> scoringModels = storeScoringService.query(scoringQueryModel, ".", "out/test/resources/rootdir/scoring-datastore-test");
+
+        Assert.assertEquals(2, scoringModels.size());
+    }
+
+    @Test
+    public void testQueryDefaultSuccess() throws Exception {
+
+        File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
+        byte[] fileBytes = Files.readAllBytes(testFile.toPath());
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
+
+        File file = storeScoringService.transform(mockMultipartFile);
+        storeScoringService.build(file);
+        ScoringQuery scoringQuery = new ScoringQuery();
+        StoreScoringService storeScoringService = new StoreScoringService();
+
+        storeScoringService.init(".", "out/test/resources/rootdir/scoring-datastore-test");
+        List<ScoringModel> scoringModels = storeScoringService.query(scoringQuery.generateDefault(), ".", "out/test/resources/rootdir/scoring-datastore-test");
+
+        Assert.assertEquals(4, scoringModels.size());
     }
 
 }

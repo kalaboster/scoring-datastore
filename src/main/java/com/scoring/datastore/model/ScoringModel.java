@@ -4,7 +4,7 @@ public class ScoringModel {
 
     private String stb;
     private String title;
-    private String providor;
+    private String provider;
     private String date;
     private String rev;
     private String viewTime;
@@ -25,12 +25,12 @@ public class ScoringModel {
         this.title = title;
     }
 
-    public String getProvidor() {
-        return providor;
+    public String getProvider() {
+        return provider;
     }
 
-    public void setProvidor(String providor) {
-        this.providor = providor;
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 
     public String getDate() {
@@ -62,5 +62,26 @@ public class ScoringModel {
         return "{ \"rev\":\"" + rev + "\", " +
                 "\"viewTime\":\"" + viewTime + "\" " +
                 "}";
+    }
+
+    public enum StoreColumns {
+
+        STB("STB"),
+        TITLE("TITLE"),
+        PROVIDER("PROVIDER"),
+        DATE("DATE"),
+        REV("REV"),
+        VIEW_TIME("VIEW_TIME");
+
+        String text;
+
+        StoreColumns(String text) {
+            this.text = text;
+        }
+
+        public String getText() {
+            return text;
+        }
+
     }
 }
