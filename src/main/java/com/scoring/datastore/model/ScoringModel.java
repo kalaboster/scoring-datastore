@@ -63,4 +63,25 @@ public class ScoringModel {
                 "\"viewTime\":\"" + viewTime + "\" " +
                 "}";
     }
+
+    public enum StoreColumns {
+
+        STB("STB"),
+        TITLE("TITLE"),
+        PROVIDER("PROVIDER"),
+        DATE("DATE"),
+        REV("REV"),
+        VIEW_TIME("VIEW_TIME");
+
+        String text;
+
+        StoreColumns(String text) {
+            this.text = text;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+    }
 }
