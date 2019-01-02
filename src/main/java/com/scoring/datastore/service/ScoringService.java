@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ScoringService {
 
-    void init();
+    void init(String root, String dataStoreName);
 
     File transform(MultipartFile multipartFile);
 
@@ -17,7 +17,7 @@ public interface ScoringService {
 
     boolean validate(ScoringModel scoringModel);
 
-    boolean store(ScoringModel scoringModel, String dataStoreName);
+    boolean store(ScoringModel scoringModel, String root, String dataStoreName);
 
-    List<ScoringModel> query(ScoringQueryModel scoringQueryModel, String dataStoreName);
+    List<ScoringModel> query(ScoringQueryModel scoringQueryModel, String root, String dataStoreName);
 }
