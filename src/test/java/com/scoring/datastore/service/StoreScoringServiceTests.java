@@ -97,8 +97,8 @@ public class StoreScoringServiceTests {
         scoringModel.setRev("12.00");
 
         StoreScoringService storeScoringService = new StoreScoringService();
-        storeScoringService.init();
-        storeScoringService.store(scoringModel, "scoring-datastore-default");
+        storeScoringService.init(".", "scoring-datastore-default");
+        storeScoringService.store(scoringModel, ".", "scoring-datastore-default");
 
         Assert.assertTrue(new File("scoring-datastore-default/provider/shortstb_title_2014-04-03.json").isFile());
         new File("scoring-datastore-default/provider/shortstb_title_2014-04-03.json").delete();
@@ -124,8 +124,8 @@ public class StoreScoringServiceTests {
         ScoringQueryModel scoringQueryModel = scoringQuery.generateDefault();
         scoringQueryModel.getFilter().setMap(filterMap);
 
-        storeScoringService.init();
-        List<ScoringModel> scoringModels = storeScoringService.query(scoringQueryModel, "out/test/resources/rootdir/scoring-datastore-test");
+        storeScoringService.init(".", "out/test/resources/rootdir/scoring-datastore-test");
+        List<ScoringModel> scoringModels = storeScoringService.query(scoringQueryModel, ".", "out/test/resources/rootdir/scoring-datastore-test");
 
         Assert.assertEquals(2, scoringModels.size());
     }
@@ -142,8 +142,8 @@ public class StoreScoringServiceTests {
         ScoringQuery scoringQuery = new ScoringQuery();
         StoreScoringService storeScoringService = new StoreScoringService();
 
-        storeScoringService.init();
-        List<ScoringModel> scoringModels = storeScoringService.query(scoringQuery.generateDefault(), "out/test/resources/rootdir/scoring-datastore-test");
+        storeScoringService.init(".", "out/test/resources/rootdir/scoring-datastore-test");
+        List<ScoringModel> scoringModels = storeScoringService.query(scoringQuery.generateDefault(), ".", "out/test/resources/rootdir/scoring-datastore-test");
 
         Assert.assertEquals(4, scoringModels.size());
     }
