@@ -42,7 +42,7 @@ public class ScoringControllerIntegrationTests {
         ResponseEntity<String> response = this.testRestTemplate.postForEntity("/scoring/store", map, String.class);
 
         assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
-        then(scoringService).should().init();
+        then(scoringService).should().init(any(), any());
         then(scoringService).should().transform(any(MultipartFile.class));
 
     }
