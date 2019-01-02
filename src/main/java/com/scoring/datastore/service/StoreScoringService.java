@@ -18,9 +18,9 @@ import java.util.List;
 public class StoreScoringService implements ScoringService {
 
     @Override
-    public void init() {
+    public void init(String root, String dataStoreName) {
         ScoringModelStorer scoringModelStorer = new ScoringModelStorer();
-        scoringModelStorer.init("./scoring-datastore-default");
+        scoringModelStorer.init(root + File.separator + dataStoreName);
     }
 
     @Override
@@ -103,21 +103,21 @@ public class StoreScoringService implements ScoringService {
 
 
     @Override
-    public boolean store(ScoringModel scoringModel, String dataStoreName) {
+    public boolean store(ScoringModel scoringModel, String root, String dataStoreName) {
 
         ScoringStorer scoringStorer = new ScoringModelStorer();
-        scoringStorer.makeRecord(scoringModel, "./" + dataStoreName);
+        scoringStorer.makeRecord(scoringModel, root + File.separator + dataStoreName);
 
         return true;
     }
 
     @Override
-    public List<ScoringModel> query(ScoringQueryModel scoringQueryModel, String dataStoreName) {
+    public List<ScoringModel> query(ScoringQueryModel scoringQueryModel, String root, String dataStoreName) {
 
         ScoringQuery scoringQuery = new ScoringQuery();
-        scoringQuery.loadStore("./", dataStoreName);
+        scoringQuery.loadStore(root + File.separator, dataStoreName);
 
-        List<ScoringModel> scoringModels = scoringQuery.loadStore("./", dataStoreName);
+        List<ScoringModel> scoringModels = scoringQuery.loadStore(root + File.separator, dataStoreName);
         scoringQuery.select(scoringQueryModel, scoringModels);
         scoringQuery.filter(scoringQueryModel, scoringModels);
 
