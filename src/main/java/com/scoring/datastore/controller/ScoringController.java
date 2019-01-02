@@ -29,7 +29,7 @@ public class ScoringController {
             scoringQueryModel = scoringQuery.generateDefault();
         }
 
-        return scoringService.query(scoringQueryModel, "scoring-datastore-default");
+        return scoringService.query(scoringQueryModel, ".", "scoring-datastore-default");
     }
 
     @RequestMapping(value = "/scoring/store", method = RequestMethod.POST)
@@ -37,14 +37,14 @@ public class ScoringController {
 
         boolean successful = true;
 
-        scoringService.init();
+        scoringService.init(".", "scoring-datastore-default");
         File file = scoringService.transform(multipartFile);
         for (ScoringModel scoringModel : scoringService.build(file)) {
             if (!scoringService.validate(scoringModel)) {
                 successful = false;
                 continue;
             }
-            scoringService.store(scoringModel, "scoring-datastore-default");
+            scoringService.store(scoringModel, ".", "scoring-datastore-default");
         }
 
         return successful;
