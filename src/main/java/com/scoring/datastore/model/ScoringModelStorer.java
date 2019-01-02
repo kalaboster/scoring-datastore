@@ -17,7 +17,7 @@ public class ScoringModelStorer implements ScoringStorer {
             try {
                 Files.createDirectory(Paths.get(root));
             } catch (IOException io) {
-                throw new ScoringStorerException("Failed to create root dir.");
+                throw new ScoringStorerException("Failed to create root dir: " + root);
             }
             complete = true;
         } else {
@@ -33,7 +33,7 @@ public class ScoringModelStorer implements ScoringStorer {
         boolean state = false;
 
         try {
-            if(!new File(root + File.separator + scoringModel.getProvider().toLowerCase()).isDirectory()) {
+            if (!new File(root + File.separator + scoringModel.getProvider().toLowerCase()).isDirectory()) {
                 Files.createDirectory(Paths.get(root + File.separator + scoringModel.getProvider().toLowerCase()));
             }
         } catch (IOException io) {
