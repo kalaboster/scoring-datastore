@@ -32,7 +32,7 @@ public class StoreScoringServiceTests {
     public void testTransformSuccess() throws Exception {
         File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
         byte[] fileBytes = Files.readAllBytes(testFile.toPath());
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "build/resources/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
 
         File file = storeScoringService.transform(mockMultipartFile);
 
@@ -49,7 +49,7 @@ public class StoreScoringServiceTests {
     public void testBuildSuccess() throws Exception {
         File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
         byte[] fileBytes = Files.readAllBytes(testFile.toPath());
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "build/resources/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
 
         File file = storeScoringService.transform(mockMultipartFile);
         List<ScoringModel> scoringModels = storeScoringService.build(file);
@@ -111,7 +111,7 @@ public class StoreScoringServiceTests {
 
         File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
         byte[] fileBytes = Files.readAllBytes(testFile.toPath());
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "build/resources/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
 
         File file = storeScoringService.transform(mockMultipartFile);
         storeScoringService.build(file);
@@ -124,8 +124,7 @@ public class StoreScoringServiceTests {
         ScoringQueryModel scoringQueryModel = scoringQuery.generateDefault();
         scoringQueryModel.getFilter().setMap(filterMap);
 
-        storeScoringService.init(".", "out/test/resources/rootdir/scoring-datastore-test");
-        List<ScoringModel> scoringModels = storeScoringService.query(scoringQueryModel, ".", "out/test/resources/rootdir/scoring-datastore-test");
+        List<ScoringModel> scoringModels = storeScoringService.query(scoringQueryModel, ".", "build/resources/test/rootdir/scoring-datastore-test");
 
         Assert.assertEquals(2, scoringModels.size());
     }
@@ -135,15 +134,14 @@ public class StoreScoringServiceTests {
 
         File testFile = FileUtil.readResourceFile("/com/scoring/datastore/datastoreInput.txt");
         byte[] fileBytes = Files.readAllBytes(testFile.toPath());
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "out/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("datastoreInput", "build/resources/test/datastoreInput.txt", MediaType.TEXT_PLAIN_VALUE, fileBytes);
 
         File file = storeScoringService.transform(mockMultipartFile);
         storeScoringService.build(file);
         ScoringQuery scoringQuery = new ScoringQuery();
         StoreScoringService storeScoringService = new StoreScoringService();
 
-        storeScoringService.init(".", "out/test/resources/rootdir/scoring-datastore-test");
-        List<ScoringModel> scoringModels = storeScoringService.query(scoringQuery.generateDefault(), ".", "out/test/resources/rootdir/scoring-datastore-test");
+        List<ScoringModel> scoringModels = storeScoringService.query(scoringQuery.generateDefault(), ".", "build/resources/test/rootdir/scoring-datastore-test");
 
         Assert.assertEquals(4, scoringModels.size());
     }

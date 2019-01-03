@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class ScoringModelStorerTests {
 
-    final String testDir = "./out/test-datastore";
+    final String testDir = "./build/test-datastore";
 
     @Test
     public void testInitSuccess() throws Exception {
