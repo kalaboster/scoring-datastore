@@ -54,7 +54,7 @@ public class ScoringQueryTests {
         ScoringQuery scoringQuery = new ScoringQuery();
         List<ScoringModel> scoringModels = scoringQuery.loadStore(file.getAbsolutePath(), "/scoring-datastore-test");
 
-        Assert.assertEquals("1:05", scoringModels.get(0).getViewTime());
+        Assert.assertEquals(4, scoringModels.size());
     }
 
 
