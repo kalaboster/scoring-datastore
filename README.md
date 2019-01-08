@@ -6,7 +6,7 @@
 
 ### Requirements
 
-Java 1.8, scala and gradle are the primary requirements. 
+Java 1.8 and gradle are the primary requirements. 
 All other requiremnts are defined in the build.gradle file and related files. 
 
 ### Building
@@ -27,7 +27,7 @@ All other requiremnts are defined in the build.gradle file and related files.
 
 1. *./gradlew bootRun*
 
-2. Navigate in browser to: *http://localhost:8080/api/swagger-ui.html*
+2. Navigate in browser to: *http://localhost:8888/api/swagger-ui.html*
 
 **End2End Scoring Post (Store)**
 
